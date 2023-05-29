@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>樂透猜猜猜</title>
+		<link rel="stylesheet" href="mystyle.css">
+	</head>
+	
+	<body>
+		<h1 class="line1">歡迎來到樂透猜猜猜！</h1>
+		<div>
+			<p class="line2">遊戲規則：請輸入3個號碼(範圍1~10)並按下開獎，若3個號碼均對中得頭獎，2個號碼對中為貳獎，1個號碼對中為參獎。</p>
+			<br>
+			<p class="line2">第1個號碼：<input id="guessnum1" type="number"></p>
+			<br>
+			<p class="line2">第2個號碼：<input id="guessnum2" type="number"></p>
+			<br>
+			<p class="line2">第3個號碼：<input id="guessnum3" type="number"></p>
+			<br><br>
+			<button onclick="lotto()">點我開獎！</button>
+			<button onclick="refresh()">重新開始>_&lt</button>
+			<br>
+		</div>
+		<p id="demo"></p>
+		
+		<script>
+			var luckynum1 = Math.floor(Math.random() * 10) + 1;
+			var luckynum2 = Math.floor(Math.random() * 10) + 1;
+			var luckynum3 = Math.floor(Math.random() * 10) + 1;
+			
+			while (luckynum1 == luckynum2){
+				luckynum2 = Math.floor(Math.random() * 10) + 1;
+			}
+			while (luckynum2 == luckynum3 || luckynum1 == luckynum3){
+				luckynum3 = Math.floor(Math.random() * 10) + 1;
+			}
+
+			var nums = [luckynum1, luckynum2, luckynum3];
+			nums.sort(function(a, b){
+				return b - a;
+			});
+			
+	
+			function lotto(){
+				let input1 = document.getElementById("guessnum1").value;
+				let input2 = document.getElementById("guessnum2").value;
+				let input3 = document.getElementById("guessnum3").value;
+				let text;
+				let count = 0;
+				
+				if ((input1 < 1 || input1 > 10) || (input2 < 1 || input2 > 10) || (input3 < 1 || input3 > 10)){
+					alert("非有效數值！請重新輸入！");
+					location.reload();
+				}
+				if (input1 == input2 || input1 == input3 || input2 == input3){
+					alert("數值重複！請重新輸入！");
+					location.reload();
+				}
+				
+				let numbers = [input1, input2, input3];
+				numbers.sort(function(a, b){
+				return b - a;
+				});
+				
+				text = "開獎號碼為：" + nums + "<br>您的號碼為：" + numbers;
+				
+				if (luckynum1 == input1 || luckynum1 == input2 || luckynum1 == input3){
+					count++;
+				}
+				if (luckynum2 == input1 || luckynum2 == input2 || luckynum2 == input3){
+					count++;
+				}
+				if (luckynum3 == input1 || luckynum3 == input2 || luckynum3 == input3){
+					count++;
+				}
+				
+				if (count == 3){
+					text += "<br>恭喜中頭獎！獲得獎金五萬！！！";
+				} else if (count == 2){
+					text += "<br>恭喜中貳獎！獲得獎金三萬！！！";
+				} else if (count == 1){
+					text += "<br>恭喜中參獎！獲得獎金一萬！！！";
+				} else{
+					text += "<br>沒有中獎Q__Q  再玩一次！";
+				}
+				
+				document.getElementById("demo").innerHTML = text;
+				document.getElementById("demo").className = "style";
+			}
+			
+			function refresh(){
+				location.reload();
+			}
+		</script>
+	</body>
+</html>
