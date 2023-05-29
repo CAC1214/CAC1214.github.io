@@ -1,0 +1,32 @@
+body {
+	background-color: #F5F5F5;
+	color: black;
+}
+div {
+	background-color: #CCCCFF;
+}
+.line1 {
+	background-color: #E5CCFF;
+	padding-left: 10px; 
+}
+.line2 {
+	padding-left: 30px; 
+	font-size: 20px;
+}
+button {
+	margin-left: 50px;
+	font-size: 20px;
+}
+.style {
+	background-color: #004C99;
+	color: white;
+	padding-left: 30px; 
+	font-size: 20px;
+}
+.style:hover {
+	background-color: #0066CC;
+}
+::selection {
+	color: white;
+	background: #003366;
+}
